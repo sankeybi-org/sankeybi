@@ -1,0 +1,27 @@
+{
+  "name": "sankeybi",
+  "description": "Publication-quality, interactive energy and material flow diagrams for Power BI.",
+  "version": "1.0.1",
+  "license": "MIT",
+  "scripts": {
+    "pbiviz": "pbiviz",
+    "start": "pbiviz start",
+    "package": "pbiviz package",
+    "typecheck": "tsc --noEmit -p tsconfig.strict.json",
+    "lint": "eslint src --max-warnings 0",
+    "checks:build": "tsc -p tsconfig.checks.json",
+    "checks": "node checks/run.js",
+    "test": "node checks/run.js"
+  },
+  "dependencies": {
+    "powerbi-visuals-api": "5.11.1",
+    "powerbi-visuals-utils-formattingmodel": "6.0.4",
+    "powerbi-visuals-utils-formattingutils": "6.1.2"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.8.0",
+    "eslint": "^9.11.1",
+    "eslint-plugin-powerbi-visuals": "^1.0.0",
+    "typescript": "5.5.4"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "SankeyBI light",
+  "dataColors": [
+    "#FF8579",
+    "#005F73",
+    "#FFE066",
+    "#7950F2",
+    "#B2F2BB",
+    "#B5231F",
+    "#A5D8FF",
+    "#343A40",
+    "#2AA7A3"
+  ],
+  "background": "#FFFFFF",
+  "foreground": "#13202C",
+  "foregroundNeutralSecondary": "#343A40",
+  "foregroundNeutralTertiary": "#DCE4EC",
+  "backgroundLight": "#E9EFF5",
+  "backgroundNeutral": "#DCE4EC",
+  "tableAccent": "#005F73",
+  "good": "#2AA7A3",
+  "neutral": "#FFE066",
+  "bad": "#B5231F",
+  "maximum": "#2AA7A3",
+  "center": "#FFE066",
+  "minimum": "#FF8579",
+  "null": "#C9D4DF"
+}

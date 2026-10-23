@@ -1,0 +1,249 @@
+// The panels follow the palette in high contrast.
+//
+// The diagram answers `isHighContrast`, and so must the visual's own UI: otherwise the node
+// editor, the flow colour editor and the background import panel would stay white-on-grey while
+// everything around them went black-on-white.
+//
+// Every colour below is `var(--name, <its default literal>)`. `visual.ts` sets those variables
+// on the host element only in high contrast and clears them otherwise, so an ordinary report
+// renders as the literals say: the variable is unset and the fallback applies. One place
+// decides, and all three panels follow, with no per-panel plumbing.
+//
+// `--sankeybi-hover-outline` defaults to `none`, so a hover is a background change; in high
+// contrast the background cannot change (there are only two colours), so the cue becomes an
+// outline instead.
+
+.sankeybi-root {
+    display: block;
+    font-family: "Segoe UI", sans-serif;
+}
+
+.sankeybi-empty-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 13px;
+    color: var(--sankeybi-fg, #666666);
+    text-align: center;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+// Background import panel (edit mode only), positioned against the host
+// element.
+.sankeybi-bg-panel {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: min(360px, calc(100% - 16px));
+    max-height: calc(100% - 16px);
+    overflow: auto;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    font: 12px "Segoe UI", sans-serif;
+    color: var(--sankeybi-fg, #323130);
+    background: var(--sankeybi-bg, #ffffff);
+    border: 1px solid var(--sankeybi-line, #c8c6c4);
+    border-radius: 4px;
+    box-shadow: var(--sankeybi-shadow, 0 4px 16px rgba(0, 0, 0, 0.18));
+    outline: none;
+    p { margin: 6px 0; line-height: 1.4; }
+    button { font: inherit; padding: 3px 12px; cursor: pointer; }
+
+    // Form controls do not inherit `color`. A <button>, <input> or <select> takes the UA's own,
+    // which is black whatever the panel says, so the node editor's row headers (which are buttons)
+    // would stay black in high contrast while every <span> around them followed.
+    button, input, select, textarea { color: inherit; }
+    input[type="text"], input[type="number"], select, textarea {
+        background: var(--sankeybi-bg, #ffffff);
+    }
+    // Only the UNCLASSED buttons -- Done, Cancel, Apply. The classed ones
+    // (`sankeybi-node-button`) set their own and are less specific than this
+    // rule, so they would be overridden by it. `revert` means "whatever the UA
+    // said", so an ordinary report keeps its native buttons exactly as they
+    // were and only high contrast, where the variables are set, takes the
+    // panel's own colours.
+    button:not([class]) {
+        background: var(--sankeybi-bg, revert);
+        border: var(--sankeybi-control-border, revert);
+    }
+}
+
+.sankeybi-bg-heading { font-size: 14px; font-weight: 600; }
+
+.sankeybi-bg-drop {
+    display: block;
+    margin: 8px 0;
+    padding: 18px 8px;
+    text-align: center;
+    border: 1px dashed var(--sankeybi-edge, #8a8886);
+    border-radius: 4px;
+    cursor: pointer;
+    input { display: none; }
+    &.sankeybi-bg-over, &:hover { background: var(--sankeybi-hover, #f3f2f1); outline: var(--sankeybi-hover-outline, none); }
+}
+
+.sankeybi-bg-error { color: var(--sankeybi-error, #a4262c); min-height: 1em; }
+
+// The node editor: the import panel's frame, wider, with a scrolling list. It starts
+// bottom-left; left/top/bottom are set by the panel, which can be dragged by its title bar.
+.sankeybi-node-panel {
+    transform: none;
+    width: min(340px, calc(100% - 16px));
+    display: flex;
+    flex-direction: column;
+}
+.sankeybi-node-head {
+    display: flex; justify-content: space-between; align-items: center;
+    cursor: move; user-select: none; touch-action: none;
+}
+// About fifteen collapsed rows before it scrolls.
+.sankeybi-node-list { overflow: auto; min-height: 0; max-height: calc(15 * 29px); flex: 0 1 auto; border-top: 1px solid var(--sankeybi-rule, #edebe9); }
+.sankeybi-node-row { border-bottom: 1px solid var(--sankeybi-rule, #edebe9); }
+.sankeybi-node-header {
+    display: flex; justify-content: space-between; width: 100%;
+    background: none; border: none; text-align: left; padding: 6px 2px; cursor: pointer;
+    &:hover { background: var(--sankeybi-hover, #f3f2f1); outline: var(--sankeybi-hover-outline, none); }
+}
+.sankeybi-node-tag { font-size: 10px; color: var(--sankeybi-muted, #605e5c); border: 1px solid var(--sankeybi-line, #c8c6c4); border-radius: 8px; padding: 0 6px; }
+.sankeybi-node-details { padding: 4px 4px 10px 16px; }
+.sankeybi-node-field {
+    margin: 6px 0;
+    > label { display: block; font-weight: 600; margin-bottom: 2px; }
+    input[type="text"], select { font: inherit; padding: 2px 4px; width: 100%; box-sizing: border-box; }
+}
+.sankeybi-node-hint { font-size: 11px; color: var(--sankeybi-muted, #605e5c); margin-top: 2px; }
+.sankeybi-node-icon {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+    .sankeybi-bg-error { flex-basis: 100%; }
+}
+.sankeybi-node-preview { width: 24px; height: 24px; object-fit: contain; }
+.sankeybi-node-button {
+    border: 1px solid var(--sankeybi-edge, #8a8886); border-radius: 2px; padding: 2px 8px; cursor: pointer; background: var(--sankeybi-bg, #ffffff);
+    &:hover { background: var(--sankeybi-hover, #f3f2f1); outline: var(--sankeybi-hover-outline, none); }
+}
+
+// Flow type colour panel (edit mode only). Borrows the import panel's shell and the node
+// editor's placement: it is dragged by its title bar and starts bottom-left, so the two panels
+// behave the same way. `position`/`left`/`bottom` are set inline by `place`, so the shell's
+// centring transform has to be undone here.
+.sankeybi-flowcolour-panel {
+    left: 8px; top: auto; bottom: 8px;
+    transform: none;
+    // Wider than the import panel's 360: a row carries a colour, a preview, a name, a texture, its
+    // two colours, a border and a reset, and a narrower panel scrolls sideways.
+    width: min(520px, calc(100% - 16px));
+    display: flex; flex-direction: column;
+    .sankeybi-bg-heading {
+        display: flex; justify-content: space-between; align-items: center;
+        cursor: move; user-select: none; touch-action: none;
+    }
+}
+
+// About twelve rows before it scrolls, the rows being one line each.
+.sankeybi-flowcolour-list {
+    overflow: auto; min-height: 0; max-height: calc(12 * 28px);
+    flex: 0 1 auto; border-top: 1px solid var(--sankeybi-rule, #edebe9);
+}
+
+.sankeybi-flowcolour-row {
+    display: flex; align-items: center; gap: 8px;
+    padding: 4px 2px;
+    border-bottom: 1px solid var(--sankeybi-rule, #edebe9);
+    input[type="color"] { flex: 0 0 auto; width: 28px; height: 20px; padding: 0; cursor: pointer; }
+    button { padding: 1px 8px; }
+}
+
+// The name takes the room; the provenance sits right-aligned beside it so the rows read as a
+// column rather than as ragged text. The name is an input (a flow type can be renamed for the
+// legend) but it should read as a row, not as a form, so it carries no border or background
+// until it is hovered or focused.
+.sankeybi-flowcolour-name {
+    // A basis of 0 on both this and its title, so they take the same share of the spare room.
+    flex: 1 1 0; min-width: 60px;
+    font: inherit; padding: 1px 2px;
+    border: 1px solid transparent; border-radius: 2px; background: none;
+    text-overflow: ellipsis;
+    // Hover gives the affordance. There is deliberately no `:focus` rule: the native focus ring is
+    // the accessible default here, and styling it could only make it worse.
+    &:hover { border-color: var(--sankeybi-line, #c8c6c4); }
+}
+
+// The texture and outline pickers. Narrow on purpose: a row is one line, and the name is what
+// should take the room. They have a fixed width, so the two columns line up down the list;
+// sizing to their content would make every row a different shape. 84px holds the longest label
+// a button ever carries ("No edge"); the longer ones live in the menu.
+// The preview of the flow being edited: its colour, or its texture in the chosen colours.
+.sankeybi-flowcolour-preview {
+    flex: 0 0 44px; height: 20px; box-sizing: border-box;
+    border: 1px solid var(--sankeybi-line, #c8c6c4); border-radius: 2px;
+}
+.sankeybi-flowcolour-pattern { flex: 0 0 84px; }
+.sankeybi-flowcolour-texcolours { flex: 0 0 52px; display: flex; gap: 4px; }
+.sankeybi-flowcolour-texcolours input[type="color"] { width: 24px; padding: 0; }
+.sankeybi-flowcolour-texcolours input.sankeybi-flowcolour-set { outline: 1px solid var(--sankeybi-muted, #605e5c); }
+
+// Column titles over the two menus, in the same fixed widths the row uses, so each title sits
+// over its column. The row's Reset is always laid out (hidden when there is nothing to reset)
+// for the same reason: a button that came and went would walk the two menus left on edited
+// rows.
+.sankeybi-flowcolour-heads {
+    display: flex; align-items: center; gap: 8px;
+    padding: 2px 2px;
+    font-size: 11px; color: var(--sankeybi-muted, #605e5c);
+    .sankeybi-flowcolour-head-colour { flex: 0 0 28px; }
+    .sankeybi-flowcolour-head-name { flex: 1 1 0; min-width: 60px; white-space: nowrap; }
+    .sankeybi-flowcolour-head-preview { flex: 0 0 44px; }
+    .sankeybi-flowcolour-head-pattern { flex: 0 0 84px; }
+    .sankeybi-flowcolour-head-texcolours { flex: 0 0 52px; }
+    .sankeybi-flowcolour-head-reset { flex: 0 0 48px; }
+}
+.sankeybi-flowcolour-row button.sankeybi-flowcolour-reset { flex: 0 0 48px; }
+
+// A dropdown we own (`panelMenu.ts`). A native <select>'s list is drawn by the browser as its
+// own popup, positioned against where it thinks the box is on screen, which inside a report
+// canvas the host scrolls and scales is nowhere near the row. The list is our own element, so
+// it can only be where we put it.
+// It is qualified by the panel, deliberately: `.sankeybi-bg-panel button` and
+// `.sankeybi-flowcolour-row button` are both more specific than a bare class, so an unqualified
+// rule here would lose its font and padding to them.
+.sankeybi-bg-panel .sankeybi-menu-button {
+    display: flex; align-items: center; gap: 4px;
+    // Narrower than the panel's own button padding, which is sized for Done.
+    padding: 2px 4px 2px 6px;
+    font: inherit; font-size: 11px;
+    min-width: 0; text-align: left;
+    border: 1px solid var(--sankeybi-line, #c8c6c4); border-radius: 2px;
+    background: var(--sankeybi-bg, #ffffff);
+    &:hover { border-color: var(--sankeybi-fg, #323130); }
+}
+.sankeybi-menu-caption { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sankeybi-menu-chevron { flex: 0 0 auto; font-size: 9px; opacity: 0.8; }
+
+.sankeybi-menu-list {
+    position: absolute;
+    // Above both panels whatever order they were appended in: the list is a
+    // sibling of them in the visual's root, not a child of the row.
+    z-index: 10;
+    min-width: 92px; max-height: 220px; overflow: auto;
+    box-sizing: border-box; padding: 2px;
+    font: 12px "Segoe UI", sans-serif;
+    color: var(--sankeybi-fg, #323130);
+    background: var(--sankeybi-bg, #ffffff);
+    border: 1px solid var(--sankeybi-line, #c8c6c4); border-radius: 4px;
+    box-shadow: var(--sankeybi-shadow, 0 4px 16px rgba(0, 0, 0, 0.18));
+}
+.sankeybi-menu-item {
+    display: block; width: 100%;
+    padding: 3px 8px; font: inherit; font-size: 11px;
+    text-align: left; cursor: pointer;
+    color: inherit; background: none; border: 1px solid transparent; border-radius: 2px;
+    &:hover { background: var(--sankeybi-hover, #f3f2f1); outline: var(--sankeybi-hover-outline, none); }
+    // The one that is current, marked by attribute so the stylesheet says it
+    // once and nothing has to keep a class list in step.
+    &[aria-checked="true"] { font-weight: 600; }
+}

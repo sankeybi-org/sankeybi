@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.tmp/
+checks/lib/
+*.pbiviz
+webpack.statistics.*.html
+__pycache__/

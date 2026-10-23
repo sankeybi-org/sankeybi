@@ -1,0 +1,37 @@
+{
+  "visual": {
+    "name": "sankeybi",
+    "displayName": "SankeyBI",
+    "guid": "sankeybiCF95AC3A2200C7D52E23D033878EC823",
+    "visualClassName": "Visual",
+    "version": "1.0.1.1",
+    "description": "Publication-quality, interactive energy and material flow diagrams for Power BI.",
+    "supportUrl": "https://sankeybi.org/#support",
+    "gitHubUrl": "https://github.com/sankeybi-org/sankeybi"
+  },
+  "apiVersion": "5.11.1",
+  "author": {
+    "name": "SankeyBI",
+    "email": "developer@sankeybi.org"
+  },
+  "assets": { "icon": "assets/sankeybi-sankey-diagram-s-logo.png" },
+  "externalJS": null,
+  "style": "style/visual.less",
+  "capabilities": "capabilities.json",
+  "dependencies": null,
+  "stringResources": [
+    "stringResources/en-GB/resources.resjson",
+    "stringResources/en-US/resources.resjson",
+    "stringResources/de-DE/resources.resjson",
+    "stringResources/fr-FR/resources.resjson",
+    "stringResources/es-ES/resources.resjson",
+    "stringResources/it-IT/resources.resjson",
+    "stringResources/nl-NL/resources.resjson",
+    "stringResources/pt-BR/resources.resjson",
+    "stringResources/pt-PT/resources.resjson",
+    "stringResources/sv-SE/resources.resjson",
+    "stringResources/da-DK/resources.resjson",
+    "stringResources/nb-NO/resources.resjson"
+  ],
+  "version": "1.0.1.1"
+}

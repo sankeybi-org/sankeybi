@@ -1,0 +1,28 @@
+{
+  "name": "SankeyBI dark",
+  "dataColors": [
+    "#FF8579",
+    "#3AA6BF",
+    "#FFE066",
+    "#9B7BF7",
+    "#B2F2BB",
+    "#E5645E",
+    "#A5D8FF",
+    "#8D98A3",
+    "#2AA7A3"
+  ],
+  "background": "#141D26",
+  "foreground": "#E7EDF3",
+  "foregroundNeutralSecondary": "#C9D4DF",
+  "foregroundNeutralTertiary": "#263340",
+  "backgroundLight": "#1D2935",
+  "backgroundNeutral": "#263340",
+  "tableAccent": "#2AA7A3",
+  "good": "#2AA7A3",
+  "neutral": "#FFE066",
+  "bad": "#E5645E",
+  "maximum": "#2AA7A3",
+  "center": "#FFE066",
+  "minimum": "#FF8579",
+  "null": "#93A3B3"
+}

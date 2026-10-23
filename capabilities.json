@@ -1,0 +1,1096 @@
+{
+  "dataRoles": [
+    {
+      "displayName": "Source",
+      "displayNameKey": "role.source",
+      "name": "source",
+      "kind": "Grouping",
+      "description": "The node a flow leaves. Each distinct value is one node.",
+      "descriptionKey": "role.source.desc"
+    },
+    {
+      "displayName": "Target",
+      "displayNameKey": "role.target",
+      "name": "target",
+      "kind": "Grouping",
+      "description": "The node a flow arrives at. A value used as both Source and Target is one node.",
+      "descriptionKey": "role.target.desc"
+    },
+    {
+      "displayName": "Value",
+      "displayNameKey": "role.value",
+      "name": "value",
+      "kind": "Measure",
+      "description": "The flow's size, as a measure. Sets flow width and the units of every total.",
+      "descriptionKey": "role.value.desc"
+    },
+    {
+      "displayName": "Flow type",
+      "displayNameKey": "role.flowType",
+      "name": "flowType",
+      "kind": "Grouping",
+      "description": "Splits a flow into one band per type, each with its own colour and legend entry.",
+      "descriptionKey": "role.flowType.desc"
+    },
+    {
+      "displayName": "Source port",
+      "displayNameKey": "role.sourcePort",
+      "name": "sourcePort",
+      "kind": "Grouping",
+      "description": "The face a flow leaves by: North, South, East or West. Blank follows Flow direction.",
+      "descriptionKey": "role.sourcePort.desc"
+    },
+    {
+      "displayName": "Target port",
+      "displayNameKey": "role.targetPort",
+      "name": "targetPort",
+      "kind": "Grouping",
+      "description": "The face a flow arrives at: North, South, East or West. Blank follows Flow direction.",
+      "descriptionKey": "role.targetPort.desc"
+    },
+    {
+      "displayName": "Source order",
+      "displayNameKey": "role.sourceOrder",
+      "name": "sourceOrder",
+      "kind": "Grouping",
+      "description": "Where the node sits in its column (or row), lowest first. Text groups nodes together.",
+      "descriptionKey": "role.sourceOrder.desc"
+    },
+    {
+      "displayName": "Target order",
+      "displayNameKey": "role.targetOrder",
+      "name": "targetOrder",
+      "kind": "Grouping",
+      "description": "Where the node sits in its column (or row), lowest first. Text groups nodes together.",
+      "descriptionKey": "role.targetOrder.desc"
+    },
+    {
+      "displayName": "Flow display order",
+      "displayNameKey": "role.flowDisplayOrder",
+      "name": "flowDisplayOrder",
+      "kind": "GroupingOrMeasure",
+      "description": "The order flow types stack in, lowest first. A column, or a measure returning a number.",
+      "descriptionKey": "role.flowDisplayOrder.desc"
+    },
+    {
+      "displayName": "Flow colour",
+      "displayNameKey": "role.flowColour",
+      "name": "flowColour",
+      "kind": "GroupingOrMeasure",
+      "description": "A colour for each flow type. A column of colours, or a measure returning one.",
+      "descriptionKey": "role.flowColour.desc"
+    },
+    {
+      "displayName": "Source icon",
+      "displayNameKey": "role.sourceIcon",
+      "name": "sourceIcon",
+      "kind": "Grouping",
+      "description": "A small SVG for the source node's label: SVG text or data URL, up to 20 KB.",
+      "descriptionKey": "role.sourceIcon.desc"
+    },
+    {
+      "displayName": "Target icon",
+      "displayNameKey": "role.targetIcon",
+      "name": "targetIcon",
+      "kind": "Grouping",
+      "description": "A small SVG for the target node's label: SVG text or data URL, up to 20 KB.",
+      "descriptionKey": "role.targetIcon.desc"
+    }
+  ],
+  "objects": {
+    "positions": {
+      "displayName": "Positions",
+      "properties": {
+        "flowDirection": {
+          "type": {
+            "enumeration": [
+              {
+                "value": "LeftToRight",
+                "displayName": "Left to right"
+              },
+              {
+                "value": "RightToLeft",
+                "displayName": "Right to left"
+              },
+              {
+                "value": "TopToBottom",
+                "displayName": "Top to bottom"
+              },
+              {
+                "value": "BottomToTop",
+                "displayName": "Bottom to top"
+              }
+            ]
+          }
+        },
+        "nodes": {
+          "type": {
+            "text": true
+          }
+        },
+        "routes": {
+          "type": {
+            "text": true
+          }
+        },
+        "snap": {
+          "type": {
+            "numeric": true
+          }
+        },
+        "showHandles": {
+          "type": {
+            "bool": true
+          }
+        },
+        "lock": {
+          "type": {
+            "bool": true
+          }
+        },
+        "lockGrid": {
+          "type": {
+            "bool": true
+          }
+        },
+        "grid": {
+          "type": {
+            "text": true
+          }
+        },
+        "fitted": {
+          "type": {
+            "text": true
+          }
+        },
+        "arrangeFlows": {
+          "type": {
+            "bool": true
+          }
+        },
+        "arrangeNodes": {
+          "type": {
+            "bool": true
+          }
+        },
+        "resetNodes": {
+          "type": {
+            "bool": true
+          }
+        },
+        "layoutFile": {
+          "type": {
+            "bool": true
+          }
+        },
+        "resetRoutes": {
+          "type": {
+            "bool": true
+          }
+        },
+        "showGrid": {
+          "type": {
+            "bool": true
+          }
+        }
+      }
+    },
+    "interaction": {
+      "displayName": "Interaction",
+      "properties": {
+        "tooltips": {
+          "type": {
+            "bool": true
+          }
+        },
+        "tooltipNodeTotals": {
+          "type": {
+            "bool": true
+          }
+        },
+        "tooltipNodeByFlowType": {
+          "type": {
+            "bool": true
+          }
+        },
+        "tooltipNodeByConnection": {
+          "type": {
+            "bool": true
+          }
+        }
+      }
+    },
+    "corridors": {
+      "displayName": "Corridors",
+      "properties": {
+        "flowWidth": {
+          "type": {
+            "numeric": true
+          }
+        },
+        "fixedBaseline": {
+          "type": {
+            "bool": true
+          }
+        },
+        "baselineCurrent": {
+          "type": {
+            "text": true
+          }
+        },
+        "baselineValue": {
+          "type": {
+            "numeric": true
+          }
+        },
+        "flowSeparation": {
+          "type": {
+            "numeric": true
+          }
+        },
+        "crossingSeparation": {
+          "type": {
+            "numeric": true
+          }
+        },
+        "defaultFlowColour": {
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "flowTexture": {
+          "type": {
+            "enumeration": [
+              {
+                "value": "None",
+                "displayName": "None"
+              },
+              {
+                "value": "Auto",
+                "displayName": "Automatic"
+              }
+            ]
+          }
+        },
+        "flowOutline": {
+          "type": {
+            "enumeration": [
+              {
+                "value": "None",
+                "displayName": "None"
+              },
+              {
+                "value": "Solid",
+                "displayName": "Solid"
+              },
+              {
+                "value": "Dashed",
+                "displayName": "Dashed"
+              }
+            ]
+          }
+        },
+        "textureColourMode": {
+          "type": {
+            "enumeration": [
+              {
+                "value": "Type",
+                "displayName": "Follow flow type"
+              },
+              {
+                "value": "Contrast",
+                "displayName": "Contrast with background"
+              },
+              {
+                "value": "Auto",
+                "displayName": "Monotone - automatic"
+              },
+              {
+                "value": "Custom",
+                "displayName": "Monotone - custom"
+              }
+            ]
+          }
+        },
+        "textureColour": {
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "textureBackgroundMode": {
+          "type": {
+            "enumeration": [
+              {
+                "value": "Background",
+                "displayName": "Report background"
+              },
+              {
+                "value": "Type",
+                "displayName": "Flow type colour"
+              },
+              {
+                "value": "Custom",
+                "displayName": "Custom"
+              }
+            ]
+          }
+        },
+        "textureBackground": {
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "outlineColourMode": {
+          "type": {
+            "enumeration": [
+              {
+                "value": "Auto",
+                "displayName": "Automatic"
+              },
+              {
+                "value": "Custom",
+                "displayName": "Custom"
+              }
+            ]
+          }
+        },
+        "outlineColour": {
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "editFlowColours": {
+          "type": {
+            "bool": true
+          }
+        },
+        "resetFlowColours": {
+          "type": {
+            "bool": true
+          }
+        },
+        "flowTypeColours": {
+          "type": {
+            "text": true
+          }
+        },
+        "routingStyle": {
+          "type": {
+            "enumeration": [
+              {
+                "value": "Polyline",
+                "displayName": "Polyline"
+              },
+              {
+                "value": "Octilinear",
+                "displayName": "Octilinear"
+              },
+              {
+                "value": "Orthogonal",
+                "displayName": "Orthogonal"
+              },
+              {
+                "value": "Smooth",
+                "displayName": "Smooth"
+              }
+            ]
+          }
+        },
+        "curvature": {
+          "type": {
+            "numeric": true
+          }
+        },
+        "straighten": {
+          "type": {
+            "numeric": true
+          }
+        },
+        "avoidNodes": {
+          "type": {
+            "bool": true
+          }
+        }
+      }
+    },
+    "labels": {
+      "displayName": "Labels",
+      "properties": {
+        "colourMode": {
+          "type": {
+            "enumeration": [
+              {
+                "value": "Auto",
+                "displayName": "Automatic"
+              },
+              {
+                "value": "Custom",
+                "displayName": "Custom"
+              }
+            ]
+          }
+        },
+        "colour": {
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "labelFontFamily": {
+          "type": {
+            "formatting": {
+              "fontFamily": true
+            }
+          }
+        },
+        "labelFontSize": {
+          "type": {
+            "formatting": {
+              "fontSize": true
+            }
+          }
+        },
+        "labelBold": {
+          "type": {
+            "bool": true
+          }
+        },
+        "labelItalic": {
+          "type": {
+            "bool": true
+          }
+        },
+        "showLabels": {
+          "type": {
+            "bool": true
+          }
+        },
+        "terminalLabelsOnly": {
+          "type": {
+            "bool": true
+          }
+        },
+        "showNodeTotals": {
+          "type": {
+            "bool": true
+          }
+        },
+        "totalFontSize": {
+          "type": {
+            "formatting": {
+              "fontSize": true
+            }
+          }
+        },
+        "totalBold": {
+          "type": {
+            "bool": true
+          }
+        },
+        "totalBasis": {
+          "type": {
+            "enumeration": [
+              {
+                "value": "Larger",
+                "displayName": "Larger of in/out"
+              },
+              {
+                "value": "Outflow",
+                "displayName": "Outflow"
+              },
+              {
+                "value": "Inflow",
+                "displayName": "Inflow"
+              }
+            ]
+          }
+        },
+        "iconSize": {
+          "type": {
+            "numeric": true
+          }
+        },
+        "iconColour": {
+          "type": {
+            "enumeration": [
+              {
+                "value": "Original",
+                "displayName": "Original"
+              },
+              {
+                "value": "Ink",
+                "displayName": "Label colour"
+              },
+              {
+                "value": "Node",
+                "displayName": "Node colour"
+              }
+            ]
+          }
+        },
+        "showUnbalanced": {
+          "type": {
+            "bool": true
+          }
+        },
+        "balanceTolerance": {
+          "type": {
+            "numeric": true
+          }
+        }
+      }
+    },
+    "flowLabels": {
+      "displayName": "Flow labels",
+      "properties": {
+        "show": {
+          "type": {
+            "bool": true
+          }
+        },
+        "outside": {
+          "type": {
+            "bool": true
+          }
+        },
+        "content": {
+          "type": {
+            "enumeration": [
+              {
+                "value": "Value",
+                "displayName": "Value"
+              },
+              {
+                "value": "PercentOfTotal",
+                "displayName": "% of all flows"
+              },
+              {
+                "value": "PercentOfSource",
+                "displayName": "% of its source node"
+              }
+            ]
+          }
+        },
+        "colourMode": {
+          "type": {
+            "enumeration": [
+              {
+                "value": "Auto",
+                "displayName": "Automatic"
+              },
+              {
+                "value": "Custom",
+                "displayName": "Custom"
+              }
+            ]
+          }
+        },
+        "colour": {
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "flowLabelFontFamily": {
+          "type": {
+            "formatting": {
+              "fontFamily": true
+            }
+          }
+        },
+        "flowLabelFontSize": {
+          "type": {
+            "formatting": {
+              "fontSize": true
+            }
+          }
+        },
+        "flowLabelBold": {
+          "type": {
+            "bool": true
+          }
+        },
+        "flowLabelItalic": {
+          "type": {
+            "bool": true
+          }
+        }
+      }
+    },
+    "legend": {
+      "displayName": "Legend",
+      "properties": {
+        "colourMode": {
+          "type": {
+            "enumeration": [
+              {
+                "value": "Auto",
+                "displayName": "Automatic"
+              },
+              {
+                "value": "Custom",
+                "displayName": "Custom"
+              }
+            ]
+          }
+        },
+        "colour": {
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "titleText": {
+          "type": {
+            "text": true
+          }
+        },
+        "legendFontFamily": {
+          "type": {
+            "formatting": {
+              "fontFamily": true
+            }
+          }
+        },
+        "legendFontSize": {
+          "type": {
+            "formatting": {
+              "fontSize": true
+            }
+          }
+        },
+        "legendBold": {
+          "type": {
+            "bool": true
+          }
+        },
+        "legendItalic": {
+          "type": {
+            "bool": true
+          }
+        },
+        "show": {
+          "type": {
+            "bool": true
+          }
+        },
+        "position": {
+          "type": {
+            "enumeration": [
+              {
+                "value": "Top",
+                "displayName": "Top"
+              },
+              {
+                "value": "Bottom",
+                "displayName": "Bottom"
+              },
+              {
+                "value": "Left",
+                "displayName": "Left"
+              },
+              {
+                "value": "Right",
+                "displayName": "Right"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "nodeShapes": {
+      "displayName": "Nodes",
+      "properties": {
+        "minWidth": {
+          "type": {
+            "numeric": true
+          }
+        },
+        "minHeight": {
+          "type": {
+            "numeric": true
+          }
+        },
+        "showShapes": {
+          "type": {
+            "bool": true
+          }
+        },
+        "shape": {
+          "type": {
+            "enumeration": [
+              {
+                "value": "None",
+                "displayName": "None"
+              },
+              {
+                "value": "Rectangle",
+                "displayName": "Rectangle"
+              },
+              {
+                "value": "Rounded",
+                "displayName": "Rounded rectangle"
+              },
+              {
+                "value": "Circle",
+                "displayName": "Circle"
+              }
+            ]
+          }
+        },
+        "padding": {
+          "type": {
+            "numeric": true
+          }
+        },
+        "fitLabel": {
+          "type": {
+            "bool": true
+          }
+        },
+        "fill": {
+          "type": {
+            "enumeration": [
+              {
+                "value": "Node",
+                "displayName": "Node colour"
+              },
+              {
+                "value": "Custom",
+                "displayName": "Custom"
+              },
+              {
+                "value": "Transparent",
+                "displayName": "None"
+              },
+              {
+                "value": "Background",
+                "displayName": "Background"
+              }
+            ]
+          }
+        },
+        "fillColour": {
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "border": {
+          "type": {
+            "enumeration": [
+              {
+                "value": "Node",
+                "displayName": "Node colour"
+              },
+              {
+                "value": "Custom",
+                "displayName": "Custom"
+              },
+              {
+                "value": "Transparent",
+                "displayName": "None"
+              },
+              {
+                "value": "Background",
+                "displayName": "Background"
+              }
+            ]
+          }
+        },
+        "borderColour": {
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "borderWidth": {
+          "type": {
+            "numeric": true
+          }
+        },
+        "editNodes": {
+          "type": {
+            "bool": true
+          }
+        },
+        "resetEdits": {
+          "type": {
+            "bool": true
+          }
+        },
+        "showArrows": {
+          "type": {
+            "bool": true
+          }
+        },
+        "heads": {
+          "type": {
+            "bool": true
+          }
+        },
+        "tails": {
+          "type": {
+            "bool": true
+          }
+        },
+        "angle": {
+          "type": {
+            "numeric": true
+          }
+        },
+        "gapPercent": {
+          "type": {
+            "numeric": true
+          }
+        }
+      }
+    },
+    "background": {
+      "displayName": "Background",
+      "properties": {
+        "show": {
+          "type": {
+            "bool": true
+          }
+        },
+        "status": {
+          "type": {
+            "text": true
+          }
+        },
+        "colourMode": {
+          "type": {
+            "enumeration": [
+              {
+                "value": "Original",
+                "displayName": "Original"
+              },
+              {
+                "value": "Greyscale",
+                "displayName": "Greyscale"
+              },
+              {
+                "value": "Tint",
+                "displayName": "Tint"
+              },
+              {
+                "value": "Duotone",
+                "displayName": "Duotone"
+              }
+            ]
+          }
+        },
+        "darkColour": {
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "lightColour": {
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "transparency": {
+          "type": {
+            "numeric": true
+          }
+        },
+        "importImage": {
+          "type": {
+            "bool": true
+          }
+        },
+        "remove": {
+          "type": {
+            "bool": true
+          }
+        },
+        "image": {
+          "type": {
+            "text": true
+          }
+        }
+      }
+    },
+    "nodeEdits": {
+      "properties": {
+        "edits": {
+          "type": {
+            "text": true
+          }
+        }
+      }
+    },
+    "numbers": {
+      "displayName": "Values",
+      "properties": {
+        "displayUnits": {
+          "type": {
+            "enumeration": [
+              {
+                "value": "Auto",
+                "displayName": "Auto"
+              },
+              {
+                "value": "None",
+                "displayName": "None"
+              },
+              {
+                "value": "Thousands",
+                "displayName": "Thousands"
+              },
+              {
+                "value": "Millions",
+                "displayName": "Millions"
+              },
+              {
+                "value": "Billions",
+                "displayName": "Billions"
+              },
+              {
+                "value": "Trillions",
+                "displayName": "Trillions"
+              }
+            ]
+          }
+        },
+        "autoDecimals": {
+          "type": {
+            "bool": true
+          }
+        },
+        "decimalPlaces": {
+          "type": {
+            "numeric": true
+          }
+        },
+        "units": {
+          "type": {
+            "text": true
+          }
+        }
+      }
+    }
+  },
+  "dataViewMappings": [
+    {
+      "categorical": {
+        "categories": {
+          "select": [
+            {
+              "for": {
+                "in": "source"
+              }
+            },
+            {
+              "for": {
+                "in": "target"
+              }
+            },
+            {
+              "for": {
+                "in": "flowType"
+              }
+            },
+            {
+              "for": {
+                "in": "flowColour"
+              }
+            },
+            {
+              "for": {
+                "in": "flowDisplayOrder"
+              }
+            },
+            {
+              "for": {
+                "in": "sourceOrder"
+              }
+            },
+            {
+              "for": {
+                "in": "targetOrder"
+              }
+            },
+            {
+              "for": {
+                "in": "sourcePort"
+              }
+            },
+            {
+              "for": {
+                "in": "targetPort"
+              }
+            },
+            {
+              "for": {
+                "in": "sourceIcon"
+              }
+            },
+            {
+              "for": {
+                "in": "targetIcon"
+              }
+            }
+          ],
+          "dataReductionAlgorithm": {
+            "window": {
+              "count": 30000
+            }
+          }
+        },
+        "values": {
+          "select": [
+            {
+              "for": {
+                "in": "value"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "privileges": [],
+  "supportsHighlight": true
+}
